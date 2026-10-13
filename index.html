@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>雅思自习室 · 从四级到 6.5+</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#f4f5fa; --card:#fff; --text:#181b26; --muted:#6b7280;
+  --primary:#4f46e5; --primary-soft:#eef2ff; --primary-dark:#3730a3;
+  --accent:#06b6d4; --ok:#10b981; --warn:#f59e0b; --danger:#ef4444;
+  --border:#e7e9f2; --radius:16px;
+}
+body{
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+  background:var(--bg); color:var(--text); line-height:1.65; -webkit-font-smoothing:antialiased;
+  padding-bottom:60px;
+}
+/* ---------- Header ---------- */
+header{
+  background:linear-gradient(135deg,#4f46e5 0%,#7c3aed 55%,#06b6d4 130%);
+  color:#fff; padding:22px 18px 18px; position:relative; overflow:hidden;
+}
+header::after{content:"";position:absolute;width:220px;height:220px;border-radius:50%;
+  background:rgba(255,255,255,.08);top:-90px;right:-60px}
+.hd-top{display:flex;align-items:center;justify-content:space-between;gap:12px;position:relative;z-index:1}
+.logo{display:flex;align-items:center;gap:10px;font-weight:700;font-size:19px;letter-spacing:.3px}
+.logo span.dot{width:10px;height:10px;border-radius:50%;background:#a5f3fc;box-shadow:0 0 12px #a5f3fc}
+.hd-sub{font-size:12.5px;opacity:.82;margin-top:6px;position:relative;z-index:1}
+.hd-stats{display:flex;gap:8px;margin-top:14px;position:relative;z-index:1;flex-wrap:wrap}
+.hd-chip{
+  background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.22);
+  border-radius:99px;padding:5px 12px;font-size:12px;backdrop-filter:blur(4px);
+}
+.hd-chip b{font-weight:700}
+/* ---------- Nav ---------- */
+nav{
+  position:sticky; top:0; z-index:50; background:rgba(244,245,250,.92);
+  backdrop-filter:blur(12px); border-bottom:1px solid var(--border);
+  display:flex; gap:6px; overflow-x:auto; padding:10px 12px; scrollbar-width:none;
+}
+nav::-webkit-scrollbar{display:none}
+nav button{
+  flex:0 0 auto; border:none; background:transparent; color:var(--muted);
+  padding:8px 15px; border-radius:99px; font-size:13.5px; font-weight:600;
+  cursor:pointer; transition:.2s; font-family:inherit; white-space:nowrap;
+}
+nav button:hover{background:#e9ebf5;color:var(--text)}
+nav button.on{background:var(--primary);color:#fff;box-shadow:0 4px 12px rgba(79,70,229,.32)}
+/* ---------- Layout ---------- */
+main{max-width:900px;margin:0 auto;padding:18px 14px}
+.card{
+  background:var(--card); border:1px solid var(--border); border-radius:var(--radius);
+  padding:18px; margin-bottom:14px; box-shadow:0 1px 3px rgba(24,27,38,.04);
+}
+.card h2{font-size:17px;margin-bottom:4px;display:flex;align-items:center;gap:8px}
+.card h3{font-size:15px;margin:14px 0 8px}
+.card h3:first-child{margin-top:0}
+.sub{font-size:13px;color:var(--muted);margin-bottom:12px}
+.muted{color:var(--muted)}
+.small{font-size:12.5px}
+.hr{height:1px;background:var(--border);margin:14px 0}
+/* ---------- Buttons ---------- */
+.btn{
+  border:none;background:var(--primary);color:#fff;padding:9px 16px;border-radius:10px;
+  font-size:13.5px;font-weight:600;cursor:pointer;font-family:inherit;transition:.18s;
+  display:inline-flex;align-items:center;gap:6px;
+}
+.btn:hover{background:var(--primary-dark);transform:translateY(-1px)}
+.btn:active{transform:translateY(0)}
+.btn.ghost{background:var(--primary-soft);color:var(--primary)}
+.btn.ghost:hover{background:#e0e5ff}
+.btn.gray{background:#eef0f6;color:#4b5563}
+.btn.gray:hover{background:#e2e5ef}
+.btn.ok{background:var(--ok)}
+.btn.warn{background:var(--warn)}
+.btn.sm{padding:6px 12px;font-size:12.5px;border-radius:8px}
+.btn:disabled{opacity:.45;cursor:not-allowed;transform:none}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+/* ---------- Chips / tags ---------- */
+.chips{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:14px}
+.chip{
+  border:1px solid var(--border);background:#fff;color:#4b5563;padding:7px 13px;
+  border-radius:99px;font-size:13px;font-weight:600;cursor:pointer;transition:.18s;font-family:inherit;
+}
+.chip:hover{border-color:#c7cbf5;background:#fafbff}
+.chip.on{background:var(--primary);border-color:var(--primary);color:#fff}
+.tag{display:inline-block;background:var(--primary-soft);color:var(--primary-dark);
+  font-size:11.5px;font-weight:700;padding:2px 9px;border-radius:99px;margin-right:6px}
+.tag.green{background:#dcfce7;color:#047857}
+.tag.orange{background:#fef3c7;color:#b45309}
+.tag.blue{background:#e0f2fe;color:#0369a1}
+/* ---------- Progress ---------- */
+.bar{height:8px;background:#eef0f6;border-radius:99px;overflow:hidden}
+.bar i{display:block;height:100%;border-radius:99px;transition:width .5s cubic-bezier(.4,0,.2,1)}
+.prog-row{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.prog-row .lbl{font-size:13px;font-weight:600;width:76px;flex:0 0 auto}
+.prog-row .bar{flex:1}
+.prog-row .val{font-size:12px;color:var(--muted);width:52px;text-align:right;flex:0 0 auto}
+/* ---------- Word card ---------- */
+.flash{
+  background:linear-gradient(150deg,#fff 0%,#f8f9ff 100%);
+  border:1px solid var(--border);border-radius:14px;padding:26px 20px;text-align:center;
+  min-height:210px;display:flex;flex-direction:column;justify-content:center;gap:8px;
+  cursor:pointer;transition:.2s;position:relative;
+}
+.flash:hover{border-color:#c7cbf5;box-shadow:0 6px 22px rgba(79,70,229,.09)}
+.flash .w{font-size:30px;font-weight:800;letter-spacing:-.5px;color:#1e1b4b;word-break:break-word}
+.flash .ph{font-size:14px;color:var(--accent);font-weight:600}
+.flash .cn{font-size:19px;font-weight:700;color:var(--primary-dark)}
+.flash .ex{font-size:13.5px;color:#4b5563;margin-top:8px;font-style:italic;line-height:1.6}
+.flash .ex-cn{font-size:12.5px;color:var(--muted);margin-top:3px}
+.flash .hint{font-size:11.5px;color:#9ca3af;position:absolute;bottom:10px;left:0;right:0}
+/* ---------- List ---------- */
+.wlist{display:flex;flex-direction:column;gap:8px}
+.witem{
+  display:flex;align-items:flex-start;gap:10px;padding:11px 13px;border-radius:11px;
+  background:#fafbfe;border:1px solid var(--border);transition:.16s;
+}
+.witem:hover{background:#f5f6ff;border-color:#d6d9f0}
+.witem .en{font-weight:700;font-size:14.5px}
+.witem .ph2{font-size:12px;color:var(--accent);font-weight:600}
+.witem .cn2{font-size:13px;color:#4b5563}
+.witem .exm{font-size:12px;color:#9ca3af;font-style:italic;margin-top:2px}
+.witem .grow{flex:1;min-width:0}
+.star{
+  border:none;background:transparent;font-size:17px;cursor:pointer;padding:2px 4px;
+  filter:grayscale(1);opacity:.35;transition:.2s;
+}
+.star.on{filter:none;opacity:1;transform:scale(1.1)}
+/* ---------- Quiz ---------- */
+.opt{
+  display:block;width:100%;text-align:left;background:#fafbfe;border:1.5px solid var(--border);
+  padding:11px 14px;border-radius:10px;margin-bottom:8px;font-size:14px;cursor:pointer;
+  font-family:inherit;transition:.16s;color:var(--text);
+}
+.opt:hover{border-color:#c7cbf5;background:#f5f6ff}
+.opt.correct{border-color:var(--ok);background:#ecfdf5;color:#065f46;font-weight:700}
+.opt.wrong{border-color:var(--danger);background:#fef2f2;color:#991b1b}
+.opt:disabled{cursor:default}
+/* ---------- Inputs ---------- */
+input[type=text],textarea,select{
+  width:100%;border:1.5px solid var(--border);border-radius:10px;padding:10px 13px;
+  font-size:14px;font-family:inherit;background:#fafbfe;color:var(--text);transition:.16s;
+}
+input[type=text]:focus,textarea:focus,select:focus{
+  outline:none;border-color:var(--primary);background:#fff;box-shadow:0 0 0 3px rgba(79,70,229,.1);
+}
+textarea{resize:vertical;line-height:1.7}
+/* ---------- Misc ---------- */
+.note{
+  background:#fffbeb;border-left:3px solid var(--warn);padding:10px 13px;border-radius:0 9px 9px 0;
+  font-size:13px;color:#78350f;margin:10px 0;
+}
+.note.blue{background:#eff6ff;border-color:#3b82f6;color:#1e3a8a}
+.note.green{background:#ecfdf5;border-color:var(--ok);color:#065f46}
+.res{border-radius:10px;padding:12px 14px;font-size:13.5px;margin-top:10px;line-height:1.7}
+.res.good{background:#ecfdf5;border:1px solid #a7f3d0;color:#065f46}
+.res.mid{background:#fffbeb;border:1px solid #fde68a;color:#78350f}
+.res.bad{background:#fef2f2;border:1px solid #fecaca;color:#991b1b}
+.kv{display:flex;gap:8px;padding:7px 0;border-bottom:1px dashed var(--border);font-size:13.5px}
+.kv:last-child{border-bottom:none}
+.kv b{flex:0 0 auto;color:var(--primary-dark);min-width:44px}
+details{border:1px solid var(--border);border-radius:11px;padding:0;margin-bottom:9px;background:#fafbfe;overflow:hidden}
+details summary{
+  padding:12px 15px;cursor:pointer;font-weight:650;font-size:14px;list-style:none;
+  display:flex;justify-content:space-between;align-items:center;gap:10px;
+}
+details summary::-webkit-details-marker{display:none}
+details summary::after{content:"＋";color:var(--primary);font-weight:700;font-size:15px;flex:0 0 auto}
+details[open] summary::after{content:"－"}
+details[open] summary{border-bottom:1px solid var(--border);background:#fff}
+details .body{padding:14px 15px;font-size:13.5px;line-height:1.75;background:#fff}
+.speak{
+  border:none;background:var(--primary-soft);color:var(--primary);width:32px;height:32px;
+  border-radius:50%;cursor:pointer;font-size:14px;flex:0 0 auto;transition:.18s;
+  display:inline-flex;align-items:center;justify-content:center;
+}
+.speak:hover{background:var(--primary);color:#fff;transform:scale(1.06)}
+.speak:active{transform:scale(.95)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media(max-width:620px){.grid2{grid-template-columns:1fr}}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th,td{padding:9px 10px;text-align:left;border-bottom:1px solid var(--border);vertical-align:top}
+th{background:#f7f8fd;font-weight:700;color:var(--primary-dark);font-size:12.5px;white-space:nowrap}
+tr:last-child td{border-bottom:none}
+.done-row{opacity:.5;text-decoration:line-through}
+.toast{
+  position:fixed;bottom:26px;left:50%;transform:translate(-50%,80px);
+  background:#1e1b4b;color:#fff;padding:11px 22px;border-radius:99px;font-size:13.5px;
+  font-weight:600;z-index:999;opacity:0;transition:.32s cubic-bezier(.4,0,.2,1);pointer-events:none;
+  box-shadow:0 10px 30px rgba(30,27,75,.3);max-width:88vw;text-align:center;
+}
+.toast.show{transform:translate(-50%,0);opacity:1}
+.sec-title{font-size:12px;font-weight:800;letter-spacing:1.2px;color:var(--muted);
+  text-transform:uppercase;margin:22px 0 10px}
+.sec-title:first-child{margin-top:0}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="hd-top">
+    <div class="logo"><span class="dot"></span>雅思自习室</div>
+    <div class="hd-chip">目标 <b id="hdGoal">6.5</b> 分</div>
+  </div>
+  <div class="hd-sub">为四级基础量身打造 · 每天 60 分钟，8 周见分晓</div>
+  <div class="hd-stats">
+    <div class="hd-chip">🔥 连续打卡 <b id="hdStreak">0</b> 天</div>
+    <div class="hd-chip">📚 已掌握 <b id="hdWords">0</b> 词</div>
+    <div class="hd-chip">🗓 累计 <b id="hdTotal">0</b> 天</div>
+  </div>
+</header>
+
+<nav id="nav"></nav>
+<main id="app"></main>
+<div class="toast" id="toast"></div>
+
+<script>
+/* ==========================================================
+   工具函数
+   ========================================================== */
+const LS = {
+  get(k,d){ try{ const v = localStorage.getItem('ielts_'+k); return v===null? d : JSON.parse(v); }catch(e){ return d; } },
+  set(k,v){ try{ localStorage.setItem('ielts_'+k, JSON.stringify(v)); }catch(e){} }
+};
+const $ = s => document.querySelector(s);
+const today = () => new Date().toISOString().slice(0,10);
+
+function toast(msg){
+  const t = $('#toast'); t.textContent = msg; t.classList.add('show');
+  clearTimeout(t._tm); t._tm = setTimeout(()=>t.classList.remove('show'), 2000);
+}
+
+/* ---------- 语音合成 ---------- */
+let VOICES = [];
+function loadVoices(){ try{ VOICES = speechSynthesis.getVoices() || []; }catch(e){ VOICES=[]; } }
+if('speechSynthesis' in window){
+  loadVoices();
+  speechSynthesis.onvoiceschanged = loadVoices;
+}
+function speak(text, rate){
+  if(!('speechSynthesis' in window)){ toast('当前浏览器不支持语音朗读'); return; }
+  try{
+    speechSynthesis.cancel();
+    const u = new SpeechSynthesisUtterance(text);
+    u.lang = 'en-GB'; u.rate = rate || 0.95; u.pitch = 1;
+    const v = VOICES.find(v=>/en-GB/i.test(v.lang)) || VOICES.find(v=>/^en/i.test(v.lang));
+    if(v) u.voice = v;
+    speechSynthesis.speak(u);
+  }catch(e){ toast('朗读失败，请检查浏览器权限'); }
+}
+function stopSpeak(){ if('speechSynthesis' in window) speechSynthesis.cancel(); }
+
+/* ==========================================================
+   全局状态
+   ========================================================== */
+let state = {
+  tab:'home',
+  learned: new Set(LS.get('learned',[])),
+  checkins: LS.get('checkins',[]),
+  goal: LS.get('goal','6.5'),
+  examDate: LS.get('examDate',''),
+  topic:'education',
+  cardIdx:0,
+  flipped:false,
+  quiz:null,
+  dictationChecked:{},
+  readingAns:{},
+  planDone: LS.get('planDone',[])
+};
+
+function saveProgress(){
+  LS.set('learned',[...state.learned]);
+  LS.set('checkins',state.checkins);
+  LS.set('planDone',state.planDone);
+  updateHeader();
+}
+function updateHeader(){
+  $('#hdGoal').textContent = state.goal;
+  $('#hdWords').textContent = state.learned.size;
+  $('#hdTotal').textContent = state.checkins.length;
+  $('#hdStreak').textContent = calcStreak();
+}
+function calcStreak(){
+  const set = new Set(state.checkins);
+  let n = 0; const d = new Date();
+  if(!set.has(today())){
+    d.setDate(d.getDate()-1);
+    if(!set.has(d.toISOString().slice(0,10))) return 0;
+  }
+  while(true){
+    const k = d.toISOString().slice(0,10);
+    if(set.has(k)){ n++; d.setDate(d.getDate()-1); } else break;
+  }
+  return n;
+}
+
+/* ==========================================================
+   数据：词汇（8 大话题 × 10 词）
+   ========================================================== */
+const VOCAB = {
+  education:{ name:'教育', icon:'🎓', words:[
+    ['curriculum','/kəˈrɪkjələm/','n. 课程体系','The school has revised its curriculum to include coding.','学校修订了课程体系，加入了编程课。'],
+    ['compulsory','/kəmˈpʌlsəri/','adj. 义务的；强制的','Education is compulsory for children between 6 and 16.','6 至 16 岁的儿童必须接受义务教育。'],
+    ['tuition','/tjuˈɪʃn/','n. 学费；教学','University tuition fees have risen sharply in recent years.','近年来大学学费大幅上涨。'],
+    ['literacy','/ˈlɪtərəsi/','n. 读写能力','The government launched a campaign to improve adult literacy.','政府发起了一场提高成人识字率的运动。'],
+    ['vocational','/vəʊˈkeɪʃənl/','adj. 职业的','Vocational training prepares students for specific jobs.','职业培训让学生为特定工作做好准备。'],
+    ['motivate','/ˈməʊtɪveɪt/','v. 激励；促使','Good teachers know how to motivate reluctant learners.','好老师知道如何激励不愿学习的学生。'],
+    ['assess','/əˈses/','v. 评估；评定','Students are assessed through both exams and coursework.','学生的成绩由考试和平日作业共同评定。'],
+    ['peer','/pɪə/','n. 同龄人；同辈','Teenagers are strongly influenced by their peers.','青少年深受同龄人的影响。'],
+    ['scholarship','/ˈskɒləʃɪp/','n. 奖学金','She won a full scholarship to study abroad.','她获得了全额奖学金出国留学。'],
+    ['critical thinking','/ˈkrɪtɪkl ˈθɪŋkɪŋ/','n. 批判性思维','Critical thinking is valued more than rote learning.','批判性思维比死记硬背更受重视。']
+  ]},
+  environment:{ name:'环境', icon:'🌍', words:[
+    ['sustainable','/səˈsteɪnəbl/','adj. 可持续的','We need sustainable solutions to the energy crisis.','我们需要可持续的能源危机解决方案。'],
+    ['emission','/ɪˈmɪʃn/','n. 排放（物）','Cutting carbon emissions is a global priority.','减少碳排放是全球的当务之急。'],
+    ['renewable','/rɪˈnjuːəbl/','adj. 可再生的','Solar and wind are renewable sources of energy.','太阳能和风能是可再生能源。'],
+    ['conservation','/ˌkɒnsəˈveɪʃn/','n. 保护；保育','Wildlife conservation requires international cooperation.','野生动物保护需要国际合作。'],
+    ['biodiversity','/ˌbaɪəʊdaɪˈvɜːsəti/','n. 生物多样性','Deforestation threatens biodiversity in the tropics.','毁林威胁着热带的生物多样性。'],
+    ['deforestation','/ˌdiːˌfɒrɪˈsteɪʃn/','n. 砍伐森林','Deforestation contributes significantly to global warming.','森林砍伐是导致全球变暖的重要因素。'],
+    ['ecosystem','/ˈiːkəʊsɪstəm/','n. 生态系统','Plastic waste damages fragile marine ecosystems.','塑料垃圾破坏了脆弱的海洋生态系统。'],
+    ['landfill','/ˈlændfɪl/','n. 垃圾填埋场','Most household rubbish ends up in landfill sites.','大多数生活垃圾最终被送进填埋场。'],
+    ['carbon footprint','/ˈkɑːbən ˈfʊtprɪnt/','n. 碳足迹','Cycling to work reduces your carbon footprint.','骑车上班能减少你的碳足迹。'],
+    ['pollutant','/pəˈluːtənt/','n. 污染物','Industrial pollutants have contaminated the river.','工业污染物污染了这条河。']
+  ]},
+  technology:{ name:'科技', icon:'💻', words:[
+    ['innovation','/ˌɪnəˈveɪʃn/','n. 创新','Innovation is the driving force behind economic growth.','创新是经济增长的驱动力。'],
+    ['automation','/ˌɔːtəˈmeɪʃn/','n. 自动化','Automation may replace many routine jobs.','自动化可能取代许多常规工作。'],
+    ['device','/dɪˈvaɪs/','n. 设备；装置','Most people own several digital devices.','大多数人拥有好几台数码设备。'],
+    ['privacy','/ˈprɪvəsi/','n. 隐私','Social media platforms are often criticised for invading privacy.','社交平台常因侵犯隐私而受批评。'],
+    ['algorithm','/ˈælɡərɪðəm/','n. 算法','Algorithms decide what content you see online.','算法决定了你在网上看到的内容。'],
+    ['obsolete','/ˈɒbsəliːt/','adj. 过时的','Technology becomes obsolete remarkably quickly.','技术过时的速度快得惊人。'],
+    ['breakthrough','/ˈbreɪkθruː/','n. 突破','Scientists have made a breakthrough in cancer research.','科学家在癌症研究上取得了突破。'],
+    ['digital divide','/ˈdɪdʒɪtl dɪˈvaɪd/','n. 数字鸿沟','The digital divide excludes many rural households.','数字鸿沟把许多农村家庭排除在外。'],
+    ['screen time','/ˈskriːn taɪm/','n. 屏幕使用时间','Parents should limit children\'s screen time.','家长应限制孩子的屏幕时间。'],
+    ['user-friendly','/ˌjuːzə ˈfrendli/','adj. 易于使用的','The app is designed to be user-friendly.','这款应用的设计非常易用。']
+  ]},
+  health:{ name:'健康', icon:'💪', words:[
+    ['obesity','/əʊˈbiːsəti/','n. 肥胖','Childhood obesity has become a serious public concern.','儿童肥胖已成为严重的公共问题。'],
+    ['sedentary','/ˈsedntri/','adj. 久坐的','A sedentary lifestyle increases the risk of heart disease.','久坐的生活方式会增加患心脏病的风险。'],
+    ['nutrition','/njuˈtrɪʃn/','n. 营养','Good nutrition is essential for growing children.','良好的营养对成长中的孩子至关重要。'],
+    ['chronic','/ˈkrɒnɪk/','adj. 慢性的','Diabetes is a chronic condition requiring long-term care.','糖尿病是一种需要长期护理的慢性病。'],
+    ['well-being','/ˌwelˈbiːɪŋ/','n. 身心健康','Regular exercise improves mental well-being.','规律运动能改善心理健康。'],
+    ['epidemic','/ˌepɪˈdemɪk/','n. 流行病','The country struggled to contain the epidemic.','该国努力控制这场流行病。'],
+    ['life expectancy','/laɪf ɪkˈspektənsi/','n. 预期寿命','Life expectancy has risen steadily over the past century.','过去一个世纪，预期寿命稳步上升。'],
+    ['balanced diet','/ˈbælənst ˈdaɪət/','n. 均衡饮食','A balanced diet should include plenty of vegetables.','均衡饮食应包含大量蔬菜。'],
+    ['immune system','/ɪˈmjuːn ˈsɪstəm/','n. 免疫系统','Sleep deprivation weakens the immune system.','睡眠不足会削弱免疫系统。'],
+    ['healthcare','/ˈhelθkeə/','n. 医疗保健','Access to healthcare should be a basic right.','获得医疗保健应当是一项基本权利。']
+  ]},
+  work:{ name:'工作', icon:'💼', words:[
+    ['candidate','/ˈkændɪdət/','n. 候选人；应聘者','There were over 200 candidates for the position.','这个职位有 200 多名应聘者。'],
+    ['promotion','/prəˈməʊʃn/','n. 晋升','She was given a promotion after two years.','两年后她获得了晋升。'],
+    ['workload','/ˈwɜːkləʊd/','n. 工作量','A heavy workload can lead to burnout.','繁重的工作量可能导致职业倦怠。'],
+    ['deadline','/ˈdedlaɪn/','n. 截止日期','We must meet the deadline for the report.','我们必须赶在截止日期前完成报告。'],
+    ['freelance','/ˈfriːlɑːns/','adj. 自由职业的','He works as a freelance translator.','他是一名自由职业译者。'],
+    ['internship','/ˈɪntɜːnʃɪp/','n. 实习','An internship gives students valuable experience.','实习能给学生宝贵的经验。'],
+    ['work-life balance','/ˌwɜːk laɪf ˈbæləns/','n. 工作生活平衡','Many young people prioritise work-life balance.','许多年轻人把工作生活平衡放在首位。'],
+    ['remote work','/rɪˈməʊt wɜːk/','n. 远程办公','Remote work has become common in many industries.','远程办公在许多行业已很普遍。'],
+    ['skill set','/ˈskɪl set/','n. 技能组合','Employers look for a diverse skill set.','雇主看重多样化的技能组合。'],
+    ['teamwork','/ˈtiːmwɜːk/','n. 团队合作','Effective teamwork requires clear communication.','有效的团队合作需要清晰的沟通。']
+  ]},
+  city:{ name:'城市', icon:'🏙️', words:[
+    ['infrastructure','/ˈɪnfrəstrʌktʃə/','n. 基础设施','The city invested heavily in transport infrastructure.','该市在交通基础设施上投入巨资。'],
+    ['congestion','/kənˈdʒestʃən/','
